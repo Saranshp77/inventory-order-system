@@ -1,0 +1,32 @@
+# Render blueprint: describes the infrastructure to create on Render.
+# When you create a "Blueprint" on Render and point it at this repo, Render
+# reads this file and provisions everything automatically.
+#
+# It defines:
+#   1. A free PostgreSQL database.
+#   2. A web service for the backend, built from backend/Dockerfile.
+#   3. Wiring so the web service's DATABASE_URL comes straight from the
+#      database's connection string — no copying secrets by hand.
+
+databases:
+  - name: inventory-db
+    databaseName: inventory   # the database name created inside PostgreSQL
+    user: inventory           # the database user
+    plan: free
+
+services:
+  - type: web
+    name: inventory-backend
+    runtime: docker
+    plan: free
+    # Build the image from the backend folder using its Dockerfile.
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    # Render pings this path to check the service is healthy.
+    healthCheckPath: /
+    envVars:
+      # Pull the full connection string from the database defined above.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: inventory-db
+          property: connectionString
