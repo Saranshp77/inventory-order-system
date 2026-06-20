@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AlertTriangle, ClipboardList, Package, Users } from 'lucide-react'
 import { getProducts } from '../api/products'
 import { getCustomers } from '../api/customers'
 import { getOrders } from '../api/orders'
@@ -51,10 +52,10 @@ export default function Dashboard() {
     .sort((a, b) => a.quantity_in_stock - b.quantity_in_stock)
 
   const stats = [
-    { label: 'Products', value: products.length, icon: '📦', to: '/products', color: 'blue' },
-    { label: 'Customers', value: customers.length, icon: '👥', to: '/customers', color: 'green' },
-    { label: 'Orders', value: orders.length, icon: '🧾', to: '/orders', color: 'purple' },
-    { label: 'Low stock', value: lowStock.length, icon: '⚠️', to: '/products', color: 'amber' },
+    { label: 'Products', value: products.length, Icon: Package, to: '/products', color: 'blue' },
+    { label: 'Customers', value: customers.length, Icon: Users, to: '/customers', color: 'green' },
+    { label: 'Orders', value: orders.length, Icon: ClipboardList, to: '/orders', color: 'purple' },
+    { label: 'Low stock', value: lowStock.length, Icon: AlertTriangle, to: '/products', color: 'amber' },
   ]
 
   return (
@@ -69,7 +70,9 @@ export default function Dashboard() {
       <div className="stat-grid">
         {stats.map((s) => (
           <Link key={s.label} to={s.to} className={`stat-card stat-${s.color}`}>
-            <div className="stat-icon">{s.icon}</div>
+            <div className="stat-icon">
+              <s.Icon size={22} strokeWidth={2} />
+            </div>
             <div>
               <div className="stat-value">{s.value}</div>
               <div className="stat-label">{s.label}</div>

@@ -1,14 +1,23 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import {
+  Boxes,
+  LayoutDashboard,
+  Menu,
+  Package,
+  ClipboardList,
+  Users,
+} from 'lucide-react'
 
 // The overall page frame: a sidebar of links + the current page content.
 // On mobile the sidebar collapses behind a hamburger button.
+// Icons are clean line-style SVGs from lucide-react.
 
 const links = [
-  { to: '/', label: 'Dashboard', icon: '📊', end: true },
-  { to: '/products', label: 'Products', icon: '📦' },
-  { to: '/customers', label: 'Customers', icon: '👥' },
-  { to: '/orders', label: 'Orders', icon: '🧾' },
+  { to: '/', label: 'Dashboard', Icon: LayoutDashboard, end: true },
+  { to: '/products', label: 'Products', Icon: Package },
+  { to: '/customers', label: 'Customers', Icon: Users },
+  { to: '/orders', label: 'Orders', Icon: ClipboardList },
 ]
 
 export default function Layout() {
@@ -23,7 +32,7 @@ export default function Layout() {
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
-          ☰
+          <Menu size={20} />
         </button>
         <span className="topbar-title">Inventory & Orders</span>
       </header>
@@ -31,7 +40,9 @@ export default function Layout() {
       {/* Sidebar navigation */}
       <aside className={`sidebar ${open ? 'open' : ''}`}>
         <div className="brand">
-          <span className="brand-icon">🏬</span>
+          <span className="brand-icon">
+            <Boxes size={20} />
+          </span>
           <span className="brand-text">IOMS</span>
         </div>
         <nav className="nav">
@@ -43,7 +54,9 @@ export default function Layout() {
               className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
               onClick={() => setOpen(false)}
             >
-              <span className="nav-icon">{link.icon}</span>
+              <span className="nav-icon">
+                <link.Icon size={18} />
+              </span>
               <span>{link.label}</span>
             </NavLink>
           ))}

@@ -1,50 +1,61 @@
 /* ============================================================
-   Inventory & Order Management — Design System
+   Inventory & Order Management — Dark Design System
    ------------------------------------------------------------
-   A clean, corporate SaaS aesthetic:
-   - Slate/gray neutral base for surfaces, text, and borders
-   - Emerald/teal accent for primary actions, active nav, links
+   A premium, corporate dark SaaS aesthetic:
+   - Rich charcoal shades (not flat black) for depth:
+       sidebar  = deepest, content = mid, cards/modals = elevated
+   - Emerald/teal accent for primary actions, active nav, links,
+     highlights, and focus rings
    - Semantic colors: emerald = good, amber = warning, red = error
    This file is purely presentational; no markup or logic changed.
    ============================================================ */
 
 :root {
-  /* --- Neutral base (slate) --- */
-  --bg: #f1f5f9;            /* app background        (slate-100) */
-  --surface: #ffffff;       /* cards, sidebar, modals            */
-  --surface-2: #f8fafc;     /* subtle fills, hovers   (slate-50) */
-  --text: #1e293b;          /* body text             (slate-800) */
-  --text-strong: #0f172a;   /* headings              (slate-900) */
-  --text-muted: #64748b;    /* helper text           (slate-500) */
-  --text-subtle: #94a3b8;   /* faint labels          (slate-400) */
-  --border: #e2e8f0;        /* dividers, card edges  (slate-200) */
-  --border-strong: #cbd5e1; /* input borders         (slate-300) */
+  color-scheme: dark; /* native selects, scrollbars, etc. render dark */
 
-  /* --- Accent (emerald / teal) --- */
-  --accent: #059669;        /* primary               (emerald-600) */
-  --accent-hover: #047857;  /* primary hover         (emerald-700) */
-  --accent-active: #065f46; /* primary active        (emerald-800) */
-  --accent-soft: #ecfdf5;   /* tints                 (emerald-50)  */
-  --accent-soft-2: #d1fae5; /* stronger tint         (emerald-100) */
-  --accent-ring: rgba(5, 150, 105, 0.18); /* focus ring          */
-  --teal: #0d9488;          /* secondary accent      (teal-600)    */
-  --teal-soft: #f0fdfa;     /* teal tint             (teal-50)     */
+  /* --- Charcoal depth layers --- */
+  --sidebar-bg: #0a0e13;    /* deepest: left sidebar              */
+  --bg: #0f141b;            /* mid: main content area             */
+  --surface: #181f29;       /* elevated: cards, tables, modals    */
+  --surface-2: #1f2733;     /* subtle: table headers, hovers      */
+  --input-bg: #10161e;      /* inset look for form controls       */
 
-  /* --- Semantic --- */
-  --ok: #047857;            --ok-bg: #ecfdf5;     --ok-border: #a7f3d0;
-  --warn: #b45309;          --warn-bg: #fffbeb;   --warn-border: #fde68a;
-  --danger: #dc2626;        --danger-bg: #fef2f2; --danger-border: #fecaca;
-  --danger-hover: #b91c1c;
+  /* --- Text --- */
+  --text: #e6ebf1;          /* primary, near-white                */
+  --text-strong: #f4f7fa;   /* headings                           */
+  --text-muted: #9aa6b4;    /* secondary / helper                 */
+  --text-subtle: #6b7787;   /* faint labels, placeholders         */
+
+  /* --- Borders --- */
+  --border: #283038;        /* dividers, card edges               */
+  --border-strong: #38424e; /* input borders                      */
+
+  /* --- Accent (emerald / teal) — bright so it pops on dark --- */
+  --accent: #10b981;             /* links, active nav, focus     (emerald-500) */
+  --accent-bright: #34d399;      /* highlights, icons            (emerald-400) */
+  --accent-strong: #059669;      /* solid primary button bg      (emerald-600) */
+  --accent-strong-hover: #10b981;/* primary hover                              */
+  --accent-soft: rgba(16, 185, 129, 0.12);  /* tint fills                     */
+  --accent-soft-2: rgba(16, 185, 129, 0.22);
+  --accent-ring: rgba(16, 185, 129, 0.35);   /* focus ring                     */
+  --teal: #14b8a6;               /* secondary accent             (teal-500)    */
+
+  /* --- Semantic (readable on dark) --- */
+  --ok: #34d399;     --ok-bg: rgba(16, 185, 129, 0.13);  --ok-border: rgba(52, 211, 153, 0.30);
+  --warn: #fbbf24;   --warn-bg: rgba(245, 158, 11, 0.13); --warn-border: rgba(251, 191, 36, 0.30);
+  --danger: #f87171; --danger-bg: rgba(239, 68, 68, 0.13); --danger-border: rgba(248, 113, 113, 0.30);
+  --danger-solid: #dc2626;
+  --danger-solid-hover: #ef4444;
 
   /* --- Shape & depth --- */
   --radius-sm: 8px;
   --radius: 10px;
   --radius-lg: 14px;
   --radius-pill: 999px;
-  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.16);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
 
   --sidebar-w: 256px;
   --content-max: 1200px;
@@ -90,6 +101,22 @@ code {
   color: var(--text);
 }
 
+/* Subtle dark scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
 /* ============================================================
    Layout
    ============================================================ */
@@ -102,7 +129,7 @@ code {
   display: none;
   align-items: center;
   gap: 12px;
-  background: var(--surface);
+  background: var(--sidebar-bg);
   border-bottom: 1px solid var(--border);
   padding: 12px 16px;
   position: sticky;
@@ -111,19 +138,22 @@ code {
 }
 
 .hamburger {
-  background: none;
-  border: 1px solid var(--border);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
   width: 38px;
   height: 38px;
-  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   color: var(--text);
-  transition: background var(--transition);
+  transition: background var(--transition), border-color var(--transition);
 }
 
 .hamburger:hover {
   background: var(--surface-2);
+  border-color: var(--accent);
 }
 
 .topbar-title {
@@ -133,7 +163,7 @@ code {
 
 .sidebar {
   width: var(--sidebar-w);
-  background: var(--surface);
+  background: var(--sidebar-bg);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -163,13 +193,9 @@ code {
   width: 34px;
   height: 34px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--accent), var(--teal));
-  font-size: 18px;
-  box-shadow: var(--shadow-xs);
-}
-
-.brand-text {
-  background: none;
+  background: linear-gradient(135deg, var(--accent-strong), var(--teal));
+  color: #06281f;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
 }
 
 .nav {
@@ -200,7 +226,7 @@ code {
 
 .nav-link.active {
   background: var(--accent-soft);
-  color: var(--accent-active);
+  color: var(--accent-bright);
   font-weight: 600;
 }
 
@@ -218,10 +244,11 @@ code {
 }
 
 .nav-icon {
-  font-size: 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 22px;
-  text-align: center;
-  filter: grayscale(0.1);
+  color: inherit; /* lucide icons use currentColor */
 }
 
 .overlay {
@@ -235,7 +262,6 @@ code {
   width: 100%;
 }
 
-/* Constrain content to a comfortable reading width and center it */
 .content > * {
   max-width: var(--content-max);
   margin-left: auto;
@@ -317,8 +343,8 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
   background: var(--accent-soft);
+  color: var(--accent-bright);
   flex-shrink: 0;
 }
 
@@ -339,13 +365,13 @@ code {
 
 /* Per-card accent variants (restrained, on-palette) */
 .stat-blue::before   { background: var(--accent); }
-.stat-blue .stat-icon { background: var(--accent-soft); }
-.stat-green::before   { background: var(--teal); }
-.stat-green .stat-icon { background: var(--teal-soft); }
-.stat-purple::before   { background: #475569; }            /* slate-600 */
-.stat-purple .stat-icon { background: #eef2f7; }
-.stat-amber::before   { background: var(--warn); }
-.stat-amber .stat-icon { background: var(--warn-bg); }
+.stat-blue .stat-icon   { background: var(--accent-soft); color: var(--accent-bright); }
+.stat-green::before  { background: var(--teal); }
+.stat-green .stat-icon  { background: rgba(20, 184, 166, 0.14); color: #2dd4bf; }
+.stat-purple::before { background: #818cf8; }
+.stat-purple .stat-icon { background: rgba(129, 140, 248, 0.14); color: #a5b4fc; }
+.stat-amber::before  { background: var(--warn); }
+.stat-amber .stat-icon  { background: var(--warn-bg); color: var(--warn); }
 
 /* ============================================================
    Card
@@ -498,7 +524,7 @@ code {
 }
 
 .btn:disabled {
-  opacity: 0.55;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -509,39 +535,37 @@ code {
 
 /* Primary — solid emerald */
 .btn-primary {
-  background: var(--accent);
-  color: #fff;
-  box-shadow: var(--shadow-xs);
+  background: var(--accent-strong);
+  color: #04221a;
+  box-shadow: 0 1px 10px rgba(16, 185, 129, 0.22);
 }
 .btn-primary:hover:not(:disabled) {
-  background: var(--accent-hover);
-}
-.btn-primary:active:not(:disabled) {
-  background: var(--accent-active);
+  background: var(--accent-strong-hover);
+  color: #04221a;
 }
 
 /* Secondary — neutral outline */
 .btn-ghost {
-  background: var(--surface);
+  background: var(--surface-2);
   border-color: var(--border-strong);
   color: var(--text);
 }
 .btn-ghost:hover:not(:disabled) {
-  background: var(--surface-2);
-  border-color: var(--text-subtle);
+  background: #283139;
+  border-color: var(--accent);
+  color: var(--text-strong);
 }
 
 /* Destructive — solid red */
 .btn-danger {
-  background: var(--danger);
+  background: var(--danger-solid);
   color: #fff;
-  box-shadow: var(--shadow-xs);
 }
 .btn-danger:hover:not(:disabled) {
-  background: var(--danger-hover);
+  background: var(--danger-solid-hover);
 }
 .btn-danger:focus-visible {
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
 }
 
 /* Destructive — quiet (table row action) */
@@ -554,7 +578,7 @@ code {
   background: var(--danger-bg);
 }
 .btn-danger-ghost:focus-visible {
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.28);
 }
 
 /* ============================================================
@@ -601,7 +625,7 @@ code {
   padding: 10px 12px;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
-  background: var(--surface);
+  background: var(--input-bg);
   color: var(--text);
   width: 100%;
   transition: border-color var(--transition), box-shadow var(--transition);
@@ -685,13 +709,13 @@ code {
   border: 1px solid var(--ok-border);
   border-radius: var(--radius);
   font-weight: 600;
-  color: var(--accent-active);
+  color: var(--accent-bright);
 }
 
 .order-total-amount {
   font-size: 20px;
   font-weight: 700;
-  color: var(--accent-active);
+  color: var(--accent-bright);
   font-variant-numeric: tabular-nums;
 }
 
@@ -729,8 +753,8 @@ code {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.5);
-  backdrop-filter: blur(2px);
+  background: rgba(2, 4, 8, 0.66);
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -746,7 +770,7 @@ code {
 
 .modal {
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
   width: 100%;
   box-shadow: var(--shadow-lg);
@@ -839,7 +863,7 @@ code {
 .empty-icon {
   font-size: 40px;
   margin-bottom: 12px;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .empty-title {
@@ -878,7 +902,7 @@ code {
   box-shadow: var(--shadow-lg);
   cursor: pointer;
   max-width: 380px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
   border-left: 4px solid var(--text-subtle);
   animation: slide-in 0.2s ease-out;
 }
@@ -920,7 +944,7 @@ code {
     display: block;
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.45);
+    background: rgba(2, 4, 8, 0.6);
     z-index: 35;
     animation: fade 150ms ease-out;
   }
