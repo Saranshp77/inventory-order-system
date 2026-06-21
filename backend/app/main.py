@@ -10,6 +10,7 @@ run the app immediately without Alembic. In Docker/production, Alembic
 migrations manage the schema instead.
 """
 
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -17,6 +18,19 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import Base, engine
 from app.routers import customers, orders, products
+
+# Which websites are allowed to call this API from a browser.
+# Configurable via the ALLOWED_ORIGINS env var (comma-separated). It defaults
+# to the deployed frontend plus local development, so production works with no
+# extra configuration.
+DEFAULT_ALLOWED_ORIGINS = (
+    "https://inventory-order-system-ruddy.vercel.app,http://localhost:5173"
+)
+ALLOWED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv("ALLOWED_ORIGINS", DEFAULT_ALLOWED_ORIGINS).split(",")
+    if origin.strip()
+]
 
 # Import models so SQLAlchemy registers the tables before create_all runs.
 from app import models  # noqa: F401
@@ -37,10 +51,10 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Allow the frontend (and the docs page) to call this API from the browser.
+# Allow only the trusted frontends to call this API from the browser.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For an assessment this is fine; tighten in real production.
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
